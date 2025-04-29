@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { ThumbsUp, ThumbsDown, Eye, User } from "lucide-react"
-import { Post } from "../types/Post"
+import { Post } from "../../types/Post"
 
 export default function PostCard({
     id,

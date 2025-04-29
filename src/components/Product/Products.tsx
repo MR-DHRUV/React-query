@@ -64,11 +64,11 @@
 
 import React from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { Spinner } from './ui/spinner'
-import { Product } from '@/types/Post'
+import { Spinner } from '../ui/spinner'
+import { Product } from '@/types/Product'
 import { ProductCard } from './ProductCard'
-import { Input } from './ui/input'
-import { Button } from './ui/button'
+import { Input } from '../ui/input'
+import { Button } from '../ui/button'
 import { Search } from 'lucide-react'
 
 // Debounce hook
