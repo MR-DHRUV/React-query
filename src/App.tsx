@@ -5,7 +5,7 @@ import {
     Route,
 } from 'react-router'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import Home from './components/Home'
+import Home from './components/Posts'
 import { Navbar } from './components/ui/navabr'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import Users from './components/Users'
