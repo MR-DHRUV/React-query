@@ -16,6 +16,8 @@ import {
     SheetTrigger,
 } from "@/components/ui/sheet";
 import { Link } from "react-router";
+import React from "react";
+import { cn } from "@/lib/utils";
 
 interface MenuItem {
     title: string;
@@ -57,6 +59,9 @@ const Navbar = ({
         },
     ],
 }: NavbarProps) => {
+
+    const [activeIdx, setActiveIdx] = React.useState<number>(0);
+
     return (
         <section className="w-full bg-background flex justify-center sticky top-4 z-50">
             {/* Desktop Menu */}
@@ -70,7 +75,7 @@ const Navbar = ({
                 <div className="flex items-center">
                     <NavigationMenu>
                         <NavigationMenuList>
-                            {menu.map((item) => renderMenuItem(item))}
+                            {menu.map((item, idx) => renderMenuItem(item, idx, activeIdx, setActiveIdx))}
                         </NavigationMenuList>
                     </NavigationMenu>
                 </div>
@@ -103,7 +108,7 @@ const Navbar = ({
                                     collapsible
                                     className="flex w-full flex-col gap-4"
                                 >
-                                    {menu.map((item) => renderMobileMenuItem(item))}
+                                    {menu.map((item, idx) => renderMobileMenuItem(item, idx, activeIdx, setActiveIdx))}
                                 </Accordion>
                             </div>
                         </SheetContent>
@@ -114,12 +119,13 @@ const Navbar = ({
     );
 };
 
-const renderMenuItem = (item: MenuItem) => {
+const renderMenuItem = (item: MenuItem, idx: number, activeIdx: number, setActiveIdx: (idx: number) => void) => {
+    console.log(item, idx, activeIdx);
     return (
-        <NavigationMenuItem key={item.title}>
+        <NavigationMenuItem key={item.title} onClick={() => setActiveIdx(idx)}>
             <Link
                 to={item.url}
-                className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-accent-foreground"
+                className={cn("group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-accent-foreground", (idx === activeIdx ? "bg-muted text-accent-foreground" : ""))}
             >
                 {item.title}
             </Link>
@@ -127,11 +133,11 @@ const renderMenuItem = (item: MenuItem) => {
     );
 };
 
-const renderMobileMenuItem = (item: MenuItem) => {
+const renderMobileMenuItem = (item: MenuItem, idx: number, activeIdx: number, setActiveIdx: (idx: number) => void) => {
     return (
-        <a key={item.title} href={item.url} className="text-md font-semibold">
+        <Link key={item.title} to={item.url} className={cn("text-md font-semibold", (idx === activeIdx ? "font-bold" : ""))} onClick={() => setActiveIdx(idx)}>
             {item.title}
-        </a>
+        </Link>
     );
 };
 

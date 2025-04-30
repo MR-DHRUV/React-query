@@ -5,7 +5,7 @@ import {
     Route,
 } from 'react-router'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import Home from './components/Post/Posts'
+import Posts from './components/Post/Posts'
 import { Navbar } from './components/ui/navabr'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import Users from './components/Users'
@@ -21,7 +21,8 @@ const App = () => {
             <BrowserRouter>
                 <Navbar />
                 <Routes>
-                    <Route path="/" element={<Home />} />
+                    <Route path="/" element={<div>Home</div>} />
+                    <Route path="/posts" element={<Posts />} />
                     <Route path="/users" element={<Users />} />
 
                     <Route path="/products/:id" element={<Product />} />

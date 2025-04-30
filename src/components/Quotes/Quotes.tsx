@@ -61,6 +61,14 @@ const Quotes = () => {
         )
     }
 
+    if (!data) {
+        return (
+            <div className='mt-10 flex justify-center'>
+                <p className="text-red-500 text-center">No data found</p>
+            </div>
+        )
+    }
+
     return (
         <div className='mt-10'>
             <h1 className="text-2xl font-bold text-center mt-4">Quotes</h1>

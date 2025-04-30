@@ -37,6 +37,14 @@ const Product = () => {
         )
     }
 
+    if (!data) {
+        return (
+            <div className='mt-10 flex justify-center'>
+                <p className="text-red-500 text-center">No data found</p>
+            </div>
+        )
+    }
+
     return (
         <Card className="max-w-5xl mt-10 mx-auto p-6 rounded-2xl shadow-lg">
             <CardHeader>

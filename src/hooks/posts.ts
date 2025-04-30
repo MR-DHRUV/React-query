@@ -1,3 +1,5 @@
+import { Post } from "@/types/Post";
+import { Response } from "@/types/Response";
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 
@@ -12,7 +14,7 @@ export const usePosts = (page: number, limit: number = 10) => {
         // A Query Key is a unique identifier for a query.
         // React Query uses it to: Cache the result of the query (5 minutes by default)
         // Identify when data should be refetched or reused
-        queryFn: () => {
+        queryFn: async ():Promise<Response<Post,"posts">> => {
             return axios.get(`https://dummyjson.com/posts?skip=${skip}&limit=${limit}`).then(res => res.data);
         },
         staleTime: 100 * 60 * 1000, // 100 minutes, time till the data is considered fresh, default is 0

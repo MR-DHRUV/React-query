@@ -1,3 +1,5 @@
+import { Quote } from "@/types/Quote";
+import { Response } from "@/types/Response";
 import { useQueries, useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 
@@ -9,7 +11,7 @@ export const useQuotesByIds = (ids: number[]) => {
     return useQueries({
         queries: ids.map((id) => ({
             queryKey: ['quote', id],
-            queryFn: () => axios.get(`https://dummyjson.com/quotes/${id}`).then(res => res.data),
+            queryFn: async():Promise<Quote> => axios.get(`https://dummyjson.com/quotes/${id}`).then(res => res.data),
             staleTime: Infinity,
         })),
         combine: (results) => {
@@ -36,7 +38,7 @@ export const useQuotes = (page: number, limit: number = defultLimit) => {
     const skip = (page - 1) * limit;
     return useQuery({
         queryKey: ['quotes', skip, limit],
-        queryFn: ({ queryKey }) => {
+        queryFn: async ({ queryKey }): Promise<Response<Quote,"quotes">> => {
             return axios.get(`https://dummyjson.com/quotes?skip=${queryKey[1]}&limit=${queryKey[2]}`).then(res => res.data);
         },
         staleTime: Infinity,
@@ -47,7 +49,7 @@ export const useQuotes = (page: number, limit: number = defultLimit) => {
 export const useInfiniteQuotes = () => {
     return useInfiniteQuery({
         queryKey: ['quotes'],
-        queryFn: ({pageParam}) => {
+        queryFn: async ({pageParam}) => {
             return axios.get(`https://dummyjson.com/quotes?skip=${pageParam.skip}&limit=${pageParam.limit}&delay=1000`).then(res => res.data);
         },
         initialPageParam: {skip: 0, limit: defultLimit},
