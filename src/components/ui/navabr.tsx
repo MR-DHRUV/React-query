@@ -51,7 +51,10 @@ const Navbar = ({
         },
         {
             title: "Products", url: "/products",
-        }
+        },
+        {
+            title: "Quotes", url: "/quotes",
+        },
     ],
 }: NavbarProps) => {
     return (

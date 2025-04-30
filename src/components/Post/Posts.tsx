@@ -3,10 +3,12 @@ import { Spinner } from '../ui/spinner'
 import { Post } from '../../types/Post'
 import { usePosts } from '@/hooks/posts'
 import PostCard from './PostCard'
+import PaginationComponent from '../ui/PaginationComponent'
 
 // react query tutorial 
 const Home = () => {
 
+    const [page, setPage] = React.useState(1);
     const {
         status, // error, pending, success
         data, // 
@@ -17,7 +19,7 @@ const Home = () => {
         isError,
         failureCount, // number of times the query has failed
         failureReason, // reason for the failure
-    } = usePosts();
+    } = usePosts(page);
 
     if (isLoading) {
         return (
@@ -27,7 +29,7 @@ const Home = () => {
         )
     }
 
-    if (isError) {
+    if (isError && error) {
         return (
             <div className='mt-10 flex justify-center'>
                 <p className="text-red-500 text-center">Error fetching products: {error.message}</p>
@@ -36,13 +38,19 @@ const Home = () => {
     }
 
     return (
-        <div className='mt-10'>
+        <div className='my-15'>
             <h1 className="text-2xl font-bold text-center mt-4">Posts</h1>
             {data && data.posts.map((post: Post) => (
-                <div key={post.id} className="flex flex-row flex-wrap justify-center gap-4 mt-4">
+                <div key={post.id} className="flex flex-row flex-wrap justify-center gap-4 my-4">
                     <PostCard {...post} />
                 </div>
             ))}
+
+            <PaginationComponent
+                currentPage={page}
+                setCurrentPage={setPage}
+                totalPages={Math.ceil(data.total / data.limit)}
+            />
         </div>
     )
 }

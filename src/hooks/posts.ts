@@ -1,22 +1,20 @@
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 
-
-const fetchPosts = () => {
-    return axios.get('https://dummyjson.com/posts').then(res => res.data);
-};
-
 // this is a custom hook that uses react-query to fetch posts from the API
 // this will allow us to use the same logic in multiple components without repeating code
 // it will also allow us to use the same query key in multiple components to share the same data
 // and avoid refetching the same data multiple times
-export const usePosts = () => {
+export const usePosts = (page: number, limit: number = 10) => {
+    const skip = (page - 1) * limit;
     return useQuery({
-        queryKey: ['posts'],
+        queryKey: ['posts', page, limit],
         // A Query Key is a unique identifier for a query.
         // React Query uses it to: Cache the result of the query (5 minutes by default)
         // Identify when data should be refetched or reused
-        queryFn: fetchPosts,
+        queryFn: () => {
+            return axios.get(`https://dummyjson.com/posts?skip=${skip}&limit=${limit}`).then(res => res.data);
+        },
         staleTime: 100 * 60 * 1000, // 100 minutes, time till the data is considered fresh, default is 0
         gcTime: 1000 * 60 * 1000, // 100 minutes, time till the data is garbage collected, default is 5 minutes
 

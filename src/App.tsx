@@ -11,6 +11,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import Users from './components/Users'
 import Products from './components/Product/Products'
 import Product from './components/Product/Product'
+import Quotes from './components/Quotes/Quotes'
 
 const queryClient = new QueryClient()
 
@@ -25,6 +26,8 @@ const App = () => {
 
                     <Route path="/products/:id" element={<Product />} />
                     <Route path="/products" element={<Products />} />
+
+                    <Route path="/quotes" element={<Quotes />} />
 
                     <Route path="*" element={<div>404 Not Found</div>} />
                 </Routes>
