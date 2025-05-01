@@ -53,7 +53,7 @@ export const useInfiniteQuotes = () => {
             return axios.get(`https://dummyjson.com/quotes?skip=${pageParam.skip}&limit=${pageParam.limit}&delay=1000`).then(res => res.data);
         },
         initialPageParam: {skip: 0, limit: defultLimit},
-        getNextPageParam: (lastPage, _pages) => { 
+        getNextPageParam: (lastPage) => { 
             const { skip, total, limit } = lastPage;
             const nextSkip = skip + limit;
             return nextSkip < total ? {skip: nextSkip, limit: limit} : undefined;

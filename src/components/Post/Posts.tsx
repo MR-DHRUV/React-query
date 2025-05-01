@@ -10,15 +10,15 @@ const Home = () => {
 
     const [page, setPage] = React.useState(1);
     const {
-        status, // error, pending, success
+        // status, // error, pending, success
         data, // 
-        isFetching, // is the data being fetched
-        isRefetching, // is the data being refetched
+        // isFetching, // is the data being fetched
+        // isRefetching, // is the data being refetched
         isLoading, // is true whenever the first fetch for a query is in-flight
         error,
         isError,
-        failureCount, // number of times the query has failed
-        failureReason, // reason for the failure
+        // failureCount, // number of times the query has failed
+        // failureReason, // reason for the failure
     } = usePosts(page);
 
     if (isLoading) {
