@@ -1,16 +1,15 @@
-import React from 'react'
 import {
     BrowserRouter,
     Routes,
     Route,
 } from 'react-router'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import Posts from './components/Post/Posts'
+import Posts from './components/Posts/Posts'
 import { Navbar } from './components/ui/navabr'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import Users from './components/Users'
-import Products from './components/Product/Products'
-import Product from './components/Product/Product'
+import Users from './components/Todos/Todos'
+import Products from './components/Products/Products'
+import Product from './components/Products/Product'
 import Quotes from './components/Quotes/Quotes'
 
 const queryClient = new QueryClient()
